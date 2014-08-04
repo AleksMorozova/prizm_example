@@ -15,8 +15,9 @@ namespace Example
         private string firstName;
         private string lastName;
         private int age;
+        private int id;
 
-        public string FirstName 
+        public virtual string FirstName 
         {
             get
             {
@@ -33,7 +34,7 @@ namespace Example
 
         }
 
-        public string LastName 
+        public virtual string LastName 
         {
             get
             {
@@ -49,7 +50,7 @@ namespace Example
             }
         }
 
-        public int Age 
+        public virtual int Age 
         {
             get
             {
@@ -65,6 +66,22 @@ namespace Example
             }
         }
 
+        public virtual int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                if (value != this.id)
+                {
+                    this.id = value;
+                    RaisePropertyChanged("Id");
+                }
+            }
+        }
+
         private void RaisePropertyChanged(string propName)
         {
             if (PropertyChanged != null)
@@ -73,9 +90,9 @@ namespace Example
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public virtual event PropertyChangedEventHandler PropertyChanged;
 
-        public object Clone()
+        public virtual object Clone()
         {
             return new Person
             {

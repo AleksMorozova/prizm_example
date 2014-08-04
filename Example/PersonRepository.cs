@@ -1,8 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using NH    = NHibernate;
+using NHCfg = NHibernate.Cfg;
+using SRef  = System.Reflection;
 
 namespace Example
 {
@@ -16,6 +20,17 @@ namespace Example
         /// <returns></returns>
         public Person GetPerson()
         {
+            var nhConfig = new NHCfg.Configuration().Configure();
+            nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
+            var sessionFactory = nhConfig.BuildSessionFactory();
+
+            using (NH.ISession session = sessionFactory.OpenSession())
+            {
+                var prof = session.QueryOver<Person>().Where(x => x.FirstName == "Ben").SingleOrDefault();
+                p = prof;
+            }
+
+
             if (p == null)
             {
                 p = new Person();
@@ -34,9 +49,25 @@ namespace Example
         /// <returns></returns>
         public void SavePerson(Person p)
         {
+            this.p.Id = p.Id;
             this.p.Age = p.Age;
             this.p.FirstName = p.FirstName;
             this.p.LastName = p.LastName;
+
+            var nhConfig = new NHCfg.Configuration().Configure();
+            nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
+            var sessionFactory = nhConfig.BuildSessionFactory();
+
+            using (NH.ISession session = sessionFactory.OpenSession())
+            {
+                using (NH.ITransaction transaction = session.BeginTransaction())
+                {
+                    session.SaveOrUpdate(p);
+
+                    transaction.Commit();
+                }
+
+            }
         }
     }
 }
