@@ -21,6 +21,10 @@ namespace Example
         public Person GetPerson()
         {
             var nhConfig = new NHCfg.Configuration().Configure();
+            nhConfig.SetProperty(
+              "connection.connection_string", @"Data Source=(LocalDB)\v11.0;AttachDbFilename="
+              + System.Environment.GetEnvironmentVariable("DATABASE")
+              + ";Integrated Security=True;Connect Timeout=30");
             nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
             var sessionFactory = nhConfig.BuildSessionFactory();
 
