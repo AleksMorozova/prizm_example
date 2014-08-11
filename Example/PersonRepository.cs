@@ -26,8 +26,19 @@ namespace Example
 
             using (NH.ISession session = sessionFactory.OpenSession())
             {
-                var prof = session.QueryOver<Person>().Where(x => x.FirstName == "Ben").SingleOrDefault();
+                var prof = session.QueryOver<Person>().Where(x => x.FirstName == "Aleksandra").SingleOrDefault();
+             
                 p = prof;
+                p.City = prof.City;
+               
+                StringBuilder sb = new StringBuilder();
+                foreach (Automobile auto in prof.Automobile)
+                {
+
+                    sb.Append(auto.Registration_number+": "+auto.Description + "| ");
+                }
+
+                p.ReturnAutomobile = sb.ToString();
             }
 
 
@@ -37,6 +48,10 @@ namespace Example
                 p.LastName = "Petrov";
                 p.FirstName = "Inan";
                 p.Age = 42;
+                City c = new City();
+                c.Name = "None";
+                c.Id = 0;
+                p.City = c;
             }
             return (Person) p.Clone();
         }

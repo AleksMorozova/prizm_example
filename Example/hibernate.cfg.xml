@@ -8,8 +8,8 @@
       NHibernate
     </property>
 
-    <property name="connection.connection_string">Data Source=(LocalDB)\v11.0;AttachDbFilename=D:\00_PROJECTS\PRIZM\ExampleGIT\db\Person.mdf;Integrated Security=True;Connect Timeout=30</property>
-    
+    <property name="connection.connection_string">Data Source=(LocalDB)\v11.0;AttachDbFilename=D:\Person.mdf;Integrated Security=True;Connect Timeout=30</property>
+    <!--  <property name="connection.connection_string">Data Source=(LocalDB)\v11.0;AttachDbFilename="C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\TestMapping.mdf";Integrated Security=True;Connect Timeout=30</property>-->
   </session-factory>
 
 </hibernate-configuration>

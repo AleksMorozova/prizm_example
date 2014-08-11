@@ -31,17 +31,27 @@
             this.components = new System.ComponentModel.Container();
             this.lblFirstName = new DevExpress.XtraEditors.LabelControl();
             this.txtLastName = new DevExpress.XtraEditors.TextEdit();
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.spinAge = new DevExpress.XtraEditors.SpinEdit();
             this.lblAge = new DevExpress.XtraEditors.LabelControl();
             this.lblLastName = new DevExpress.XtraEditors.LabelControl();
             this.txtFirstName = new DevExpress.XtraEditors.TextEdit();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnLoad = new DevExpress.XtraEditors.SimpleButton();
-            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAge.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFirstName
@@ -59,6 +69,10 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(179, 20);
             this.txtLastName.TabIndex = 1;
+            // 
+            // bindingSource
+            // 
+            this.bindingSource.DataSource = typeof(Example.Person);
             // 
             // spinAge
             // 
@@ -106,13 +120,14 @@
             this.txtFirstName.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bindingSource, "FirstName", true));
             this.txtFirstName.Location = new System.Drawing.Point(93, 12);
             this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtFirstName.Size = new System.Drawing.Size(179, 20);
             this.txtFirstName.TabIndex = 5;
             // 
             // btnSave
             // 
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(116, 141);
+            this.btnSave.Location = new System.Drawing.Point(119, 166);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 6;
@@ -120,21 +135,63 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(197, 141);
+            this.btnLoad.Location = new System.Drawing.Point(200, 166);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 23);
             this.btnLoad.TabIndex = 7;
             this.btnLoad.Text = "Load";
             // 
-            // bindingSource
+            // labelControl1
             // 
-            this.bindingSource.DataSource = typeof(Example.Person);
+            this.labelControl1.Location = new System.Drawing.Point(34, 103);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(23, 13);
+            this.labelControl1.TabIndex = 8;
+            this.labelControl1.Text = "City:";
+            // 
+            // textEdit1
+            // 
+            this.textEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bindingSource1, "Name", true));
+            this.textEdit1.Location = new System.Drawing.Point(93, 100);
+            this.textEdit1.Name = "textEdit1";
+            this.textEdit1.Properties.ReadOnly = true;
+            this.textEdit1.Size = new System.Drawing.Size(179, 20);
+            this.textEdit1.TabIndex = 9;
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = typeof(Example.City);
+            // 
+            // textEdit2
+            // 
+            this.textEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bindingSource, "ReturnAutomobile", true));
+            this.textEdit2.Location = new System.Drawing.Point(93, 126);
+            this.textEdit2.Name = "textEdit2";
+            this.textEdit2.Properties.ReadOnly = true;
+            this.textEdit2.Size = new System.Drawing.Size(179, 20);
+            this.textEdit2.TabIndex = 10;
+            // 
+            // bindingSource2
+            // 
+            this.bindingSource2.DataSource = typeof(Example.Person);
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(34, 133);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(26, 13);
+            this.labelControl2.TabIndex = 11;
+            this.labelControl2.Text = "Cars:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 176);
+            this.ClientSize = new System.Drawing.Size(304, 216);
+            this.Controls.Add(this.labelControl2);
+            this.Controls.Add(this.textEdit2);
+            this.Controls.Add(this.textEdit1);
+            this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtFirstName);
@@ -146,9 +203,13 @@
             this.Name = "MainForm";
             this.Text = "Person App";
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAge.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,6 +226,12 @@
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.SimpleButton btnLoad;
         private System.Windows.Forms.BindingSource bindingSource;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private DevExpress.XtraEditors.TextEdit textEdit2;
+        private System.Windows.Forms.BindingSource bindingSource2;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
     }
 }
 

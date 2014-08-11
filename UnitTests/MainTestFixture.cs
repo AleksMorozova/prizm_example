@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using NUnit.Framework;
+//using nu
 
 namespace UnitTests
 {
-    [TestFixture]
+  //  [TestFixture]
     public class MainTestFixture
     {
     }

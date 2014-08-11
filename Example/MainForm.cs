@@ -36,8 +36,13 @@ namespace Example
 
         public void SetPerson(Person p)
         {
+           
             bindingSource.DataSource = p;
+            bindingSource1.DataSource = p.City;
+            //bindingSource2.DataSource = p.ReturnAutomobile;
             btnSave.Enabled = true;
         }
+
+  
     }
 }

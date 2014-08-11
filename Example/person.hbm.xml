@@ -12,8 +12,20 @@
     <property name="FirstName" column="first_name"  type ="string" />
     <property name="Age" column="age" type ="int"  />
     <property name="LastName" column="last_name" type ="string"/>
+   <!-- <list name="City" cascade="all-delete-orphan">
+      <key column="id"/>
+      <index column="id"/>
+      <one-to-many class="city"/>
+    </list> -->
+    <one-to-one name="City" class ="City"  />
 
-
+    <bag name="Automobile" cascade="all">
+      <key>
+        <column name="Id"/>
+      </key>
+      <one-to-many class="Automobile" />
+    </bag>
+    
   </class>
 
 

@@ -16,6 +16,52 @@ namespace Example
         private string lastName;
         private int age;
         private int id;
+        private City city;
+        private IList<Automobile> automobile;
+        private string returnAutomobile;
+
+        public virtual string ReturnAutomobile
+        {
+            get
+            {
+                //StringBuilder sb = new StringBuilder();
+                //foreach (Automobile auto in automobile)
+                //{
+
+                //    sb.Append("1 " + auto.Description + " ");
+                //}
+
+                ////returnAutomobile = sb.ToString();
+                //returnAutomobile = "!!!";
+                return returnAutomobile;
+            }
+            set
+            {
+              
+                if (value != this.returnAutomobile)
+                {
+                    this.returnAutomobile = value;
+                    RaisePropertyChanged("ReturnAutomobile");
+                }
+            }
+
+        }
+
+        public virtual IList<Automobile> Automobile
+        {
+            get
+            {
+                return automobile;
+            }
+            set
+            {
+                if (value != this.automobile)
+                {
+                    this.automobile = value;
+                    RaisePropertyChanged("Automobile");
+                }
+            }
+        }
 
         public virtual string FirstName 
         {
@@ -82,6 +128,22 @@ namespace Example
             }
         }
 
+        public virtual City City
+        {
+            get
+            {
+                return city;
+            }
+            set
+            {
+                if (value != this.city)
+                {
+                    this.city = value;
+                    RaisePropertyChanged("City");
+                }
+            }
+        }
+
         private void RaisePropertyChanged(string propName)
         {
             if (PropertyChanged != null)
@@ -99,6 +161,8 @@ namespace Example
                FirstName = this.firstName,
                LastName = this.lastName,
                Age = this.age,
+               City=this.city,
+               ReturnAutomobile=this.returnAutomobile,
             };
         }
     }
