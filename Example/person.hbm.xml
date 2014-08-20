@@ -12,21 +12,33 @@
     <property name="FirstName" column="first_name"  type ="string" />
     <property name="Age" column="age" type ="int"  />
     <property name="LastName" column="last_name" type ="string"/>
-   <!-- <list name="City" cascade="all-delete-orphan">
-      <key column="id"/>
-      <index column="id"/>
-      <one-to-many class="city"/>
-    </list> -->
-    <one-to-one name="City" class ="City"  />
 
-    <bag name="Automobile" cascade="all">
+    <many-to-one name="City" column="city_id"
+    class="City" fetch="join" />
+
+    <one-to-one name="Extra" class ="AdditionalInformation" cascade="all" />
+    <!--  -->
+    <bag name="Automobiles" cascade="all">
       <key>
-        <column name="Id"/>
+        <column name="Person_id"/>
       </key>
       <one-to-many class="Automobile" />
     </bag>
-    
+
+    <!--
+      <bag name=" Certificates" inverse="false" cascade="all" lazy="true" >
+        <key>cascade="all-delete-orphan"
+          <column name="id"/>
+        </key>
+    <many-to-many class="Certificate" />
+  </bag>
+     -->
+    <bag name="Certificates" table="person_certificate"   lazy="false" >
+      <key column="person_id" />
+      <many-to-many class="Certificate" column="certificate_id"
+      not-found="exception"
+       />
+    </bag>
+
   </class>
-
-
 </hibernate-mapping>

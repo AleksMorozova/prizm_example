@@ -10,6 +10,8 @@ namespace Example
     {
         event EventHandler Save;
         event EventHandler Load;
+        event EventHandler Update;
+        event EventHandler Delete;
         event EventHandler ViewDispose;
 
         void ShowValidationError(string text);

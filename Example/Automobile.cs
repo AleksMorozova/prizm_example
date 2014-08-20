@@ -11,7 +11,7 @@ namespace Example
     {
         private string description;
         private int id;
-        private int id_automobile;
+        private int person_id;
         private string registration_number;
 
         public virtual string Description
@@ -46,17 +46,17 @@ namespace Example
             }
         }
 
-        public virtual int Id_automobile
+        public virtual int Person_id
         {
             get
             {
-                return id_automobile;
+                return person_id;
             }
             set
             {
-                if (value != this.id_automobile)
+                if (value != this.person_id)
                 {
-                    this.id_automobile = value;
+                    this.person_id = value;
                     RaisePropertyChanged("Id_automobile");
                 }
             }
@@ -93,7 +93,7 @@ namespace Example
             return new Automobile
             {
                 Description = this.description,
-                Id_automobile = this.id_automobile,
+                Person_id = this.person_id,
                 Id = this.id,
                 Registration_number = this.registration_number,
             };

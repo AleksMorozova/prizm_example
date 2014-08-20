@@ -3,13 +3,21 @@
                    assembly="Example"
                    namespace="Example">
 
-  <class name="City" table="[city]" lazy="true">
+  <class name="Certificate" table="[certificates]" lazy="true">
 
     <id name="Id" column="id" type ="int" >
 
       <generator class="native" />
     </id>
     <property name="Name" column="name"  type ="string" />
+
+    <!--
+    
+    <set name="Users" inverse="true" table="UsersRolesBridge" lazy="false" >
+      <key column="RoleKey" />
+      <many-to-many class="User" column="UserKey" />
+    </set>
+    -->
 
 
   </class>

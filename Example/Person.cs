@@ -17,48 +17,73 @@ namespace Example
         private int age;
         private int id;
         private City city;
-        private IList<Automobile> automobile;
-        private string returnAutomobile;
 
-        public virtual string ReturnAutomobile
+        private AdditionalInformation extra;
+        private IList<Automobile> automobiles;//=new List<Automobile>();
+        private IList<Automobile> personAutomobiles;
+
+        private IList<Certificate> certificates;
+
+        public virtual IList<Automobile> PersonAutomobiles
         {
             get
             {
-                //StringBuilder sb = new StringBuilder();
-                //foreach (Automobile auto in automobile)
-                //{
-
-                //    sb.Append("1 " + auto.Description + " ");
-                //}
-
-                ////returnAutomobile = sb.ToString();
-                //returnAutomobile = "!!!";
-                return returnAutomobile;
+                return personAutomobiles;
             }
             set
             {
-              
-                if (value != this.returnAutomobile)
+                if (value != this.personAutomobiles)
                 {
-                    this.returnAutomobile = value;
-                    RaisePropertyChanged("ReturnAutomobile");
+                    this.personAutomobiles = value;
+                    RaisePropertyChanged("PersonAutomobiles");
                 }
             }
-
         }
 
-        public virtual IList<Automobile> Automobile
+        public virtual AdditionalInformation Extra
         {
             get
             {
-                return automobile;
+                return extra;
             }
             set
             {
-                if (value != this.automobile)
+                if (value != this.extra)
                 {
-                    this.automobile = value;
+                    this.extra = value;
+                    RaisePropertyChanged("PersonAutomobiles");
+                }
+            }
+        }
+
+        public virtual IList<Automobile> Automobiles
+        {
+            get
+            {
+                return automobiles;
+            }
+            set
+            {
+                if (value != this.automobiles)
+                {
+                    this.automobiles = value;
                     RaisePropertyChanged("Automobile");
+                }
+            }
+        }
+
+        public virtual IList<Certificate> Certificates
+        {
+            get
+            {
+                return certificates;
+            }
+            set
+            {
+                if (value != this.certificates)
+                {
+                    this.certificates = value;
+                    RaisePropertyChanged("Certificates");
                 }
             }
         }
@@ -158,11 +183,13 @@ namespace Example
         {
             return new Person
             {
-               FirstName = this.firstName,
-               LastName = this.lastName,
-               Age = this.age,
-               City=this.city,
-               ReturnAutomobile=this.returnAutomobile,
+                FirstName = this.firstName,
+                LastName = this.lastName,
+                Age = this.age,
+                City = this.city,
+                Automobiles = this.automobiles,
+                Certificates = this.certificates,
+                Extra = this.extra,
             };
         }
     }
