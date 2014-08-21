@@ -145,18 +145,43 @@ namespace Example
             nhConfig.AddAssembly(Assembly.GetExecutingAssembly());
             var sessionFactory = nhConfig.BuildSessionFactory();
 
-            using (ISession session = sessionFactory.OpenSession())
+
+            using (RepositoryBase repository = new RepositoryBase())
             {
-                var city = session.CreateCriteria<City>().List<City>();
-
-                foreach (City c in city)
+                try
                 {
-                    comboBoxEdit1.Properties.Items.Add(c.Name);
-                    personCity.Add(i, c);
-                    i++;
+                    //repository.BeginTransaction();
 
+                    var city = repository.GetCity();
+
+                    foreach (City c in city)
+                    {
+                        comboBoxEdit1.Properties.Items.Add(c.Name);
+                        personCity.Add(i, c);
+                        i++;
+
+                    }
+                }
+                catch 
+                {
+                    //repository.RollbackTransaction();
                 }
             }
+
+
+
+            //using (ISession session = sessionFactory.OpenSession())
+            //{
+            //    var city = session.CreateCriteria<City>().List<City>();
+
+            //    foreach (City c in city)
+            //    {
+            //        comboBoxEdit1.Properties.Items.Add(c.Name);
+            //        personCity.Add(i, c);
+            //        i++;
+
+            //    }
+            //}
 
 
             int j = 0;

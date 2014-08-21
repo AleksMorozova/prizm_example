@@ -69,6 +69,7 @@
     <Compile Include="Automobile.cs" />
     <Compile Include="Certificate.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="Extra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +78,7 @@
     </Compile>
     <Compile Include="IPersonRepository.cs" />
     <Compile Include="IPersonView.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +96,7 @@
     <Compile Include="PersonRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryBase.cs" />
     <EmbeddedResource Include="Extra.resx">
       <DependentUpon>Extra.cs</DependentUpon>
     </EmbeddedResource>

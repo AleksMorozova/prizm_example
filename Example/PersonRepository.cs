@@ -30,7 +30,7 @@ namespace Example
 
             using (NH.ISession session = sessionFactory.OpenSession())
             {
-                var prof = session.QueryOver<Person>().Where(x => x.FirstName == "Ben")
+                var prof = session.QueryOver<Person>().Where(x => x.FirstName == "Tom")
                     .SingleOrDefault();
 
                 p = prof;
@@ -148,28 +148,40 @@ namespace Example
         /// <returns></returns>
         public void UpdatePerson(Person p)
         {
-
-
-            var nhConfig = new NHCfg.Configuration().Configure();
-            nhConfig.SetProperty(
-              "connection.connection_string", @"Data Source=(LocalDB)\v11.0;AttachDbFilename="
-              + System.Environment.GetEnvironmentVariable("DATABASE")
-              + ";Integrated Security=True;Connect Timeout=30");
-            nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
-
-            var sessionFactory = nhConfig.BuildSessionFactory();
-
-            p.Id = this.p.Id;
-
-            using (NH.ISession session = sessionFactory.OpenSession())
+            using (RepositoryBase repository = new RepositoryBase())
             {
-                using (NH.ITransaction transaction = session.BeginTransaction())
+                try
                 {
-
-                    session.Update(p);
-                    transaction.Commit();
+                    repository.BeginTransaction();
+                    p.Id = this.p.Id;
+                    repository.Update(p);
+                }
+                catch 
+                {
+                    repository.RollbackTransaction();
                 }
             }
+
+            //var nhConfig = new NHCfg.Configuration().Configure();
+            //nhConfig.SetProperty(
+            //  "connection.connection_string", @"Data Source=(LocalDB)\v11.0;AttachDbFilename="
+            //  + System.Environment.GetEnvironmentVariable("DATABASE")
+            //  + ";Integrated Security=True;Connect Timeout=30");
+            //nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
+
+            //var sessionFactory = nhConfig.BuildSessionFactory();
+
+            //p.Id = this.p.Id;
+
+            //using (NH.ISession session = sessionFactory.OpenSession())
+            //{
+            //    using (NH.ITransaction transaction = session.BeginTransaction())
+            //    {
+
+            //        session.Update(p);
+            //        transaction.Commit();
+            //    }
+            //}
         }
 
 
