@@ -90,10 +90,50 @@ namespace Example
             textEdit1.Text = CertificateListToString(myPerson.Certificates);
 
         }
-
-        private void MainForm_Load(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Load");
+            myPerson.City = personCity[comboBoxEdit1.SelectedIndex];
+
+            myPerson.Certificates = new List<Certificate>();
+
+
+            for (int i = 0; i < listBoxControl1.SelectedItems.Count; i++)
+            {
+                myPerson.Certificates.Add(personCertif[listBoxControl1.SelectedIndices[i]]);
+            }
+
+        }
+
+        public string AutomobilesListToString(IList<Automobile> auto)
+        {
+            StringBuilder list = new StringBuilder();
+            foreach (Automobile a in auto)
+            {
+                list.Append(a.Registration_number + ": " + a.Description + "| ");
+            }
+
+            return list.ToString();
+        }
+
+        public string CertificateListToString(IList<Certificate> certif)
+        {
+            StringBuilder list = new StringBuilder();
+            foreach (Certificate c in certif)
+            {
+                list.Append(c.Name + "| ");
+            }
+
+            return list.ToString(); ;
+        }
+
+        private void btnExtra_Click(object sender, EventArgs e)
+        {
+            Extra form = new Extra(myPerson);
+            form.ShowDialog();
+        }
+
+        private void MainForm_Load_1(object sender, EventArgs e)
+        {
             int i = 0;
             personCity = new Dictionary<int, City>();
             IList<City> allcity = new List<City>();
@@ -140,6 +180,7 @@ namespace Example
 
                 listBoxControl1.SelectedIndex = -1;
 
+
                 //for (int k = 0; k < listBoxControl1.SelectedItems.Count; k++)
                 //{
                 //    foreach(Certificate c in myPerson.Certificates)
@@ -152,49 +193,6 @@ namespace Example
                 // listBoxControl1.SetSelected(6, true);
 
             }
-
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            myPerson.City = personCity[comboBoxEdit1.SelectedIndex];
-
-            myPerson.Certificates = new List<Certificate>();
-
-
-            for (int i = 0; i < listBoxControl1.SelectedItems.Count; i++)
-            {
-                myPerson.Certificates.Add(personCertif[listBoxControl1.SelectedIndices[i]]);
-            }
-
-        }
-
-        public string AutomobilesListToString(IList<Automobile> auto)
-        {
-            StringBuilder list = new StringBuilder();
-            foreach (Automobile a in auto)
-            {
-                list.Append(a.Registration_number + ": " + a.Description + "| ");
-            }
-
-            return list.ToString();
-        }
-
-        public string CertificateListToString(IList<Certificate> certif)
-        {
-            StringBuilder list = new StringBuilder();
-            foreach (Certificate c in certif)
-            {
-                list.Append(c.Name + "| ");
-            }
-
-            return list.ToString(); ;
-        }
-
-        private void btnExtra_Click(object sender, EventArgs e)
-        {
-            Extra form = new Extra(myPerson);
-            form.ShowDialog();
         }
 
   

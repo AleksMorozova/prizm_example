@@ -251,7 +251,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 364);
+            this.ClientSize = new System.Drawing.Size(380, 338);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.textEdit1);
             this.Controls.Add(this.comboBoxEdit1);
@@ -273,6 +273,7 @@
             this.Controls.Add(this.lblFirstName);
             this.Name = "MainForm";
             this.Text = "Person App";
+            this.Load += new System.EventHandler(this.MainForm_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAge.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).EndInit();
