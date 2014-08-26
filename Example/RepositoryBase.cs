@@ -55,7 +55,7 @@ namespace Example
             _transaction = null;
         }
 
-        private void CloseSession()
+        public void CloseSession()
         {
             _session.Close();
             _session.Dispose();
@@ -78,7 +78,7 @@ namespace Example
 
         public virtual void Update(object obj)
         {
-            _session.Update(obj);
+            _session.SaveOrUpdate(obj);
         }
 
         public virtual IList<City> GetCity()
@@ -86,10 +86,17 @@ namespace Example
             return _session.CreateCriteria<City>().List<City>();
         }
 
-        //public virtual IQueryable<TEntity> ToList<TEntity>()
-        //{
-        //    return (from entity in _session.Linq<TEntity>() select entity);
-        //}
+        public virtual IList<Certificate> GetCertificates()
+        {
+            return _session.CreateCriteria<Certificate>().List<Certificate>();
+        }
+
+
+        public virtual Person GetPerson()
+        {
+            return _session.QueryOver<Person>().Where(x => x.FirstName == "AnnM").SingleOrDefault();
+        }
+
 
         #endregion
 

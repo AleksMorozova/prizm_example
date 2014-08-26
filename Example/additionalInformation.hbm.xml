@@ -3,7 +3,7 @@
                    assembly="Example"
                    namespace="Example">
 
-  <class name="AdditionalInformation" table="[additianal_information]" lazy="true">
+  <class name="AdditionalInformation" table="[additional_information]" lazy="true">
 
     <id name="Id" column="id" type ="int" >
       <generator class="identity" />

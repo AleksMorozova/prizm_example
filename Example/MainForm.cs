@@ -18,13 +18,14 @@ namespace Example
         public Dictionary<int, City> personCity;
         public Dictionary<int, Certificate> personCertif;
         public Person myPerson;
+        public ItemCache cache;
 
         public MainForm()
         {
             InitializeComponent();
 
             btnLoad.Click += (s,e) => Load(this, e);
-            btnSave.Click += (s, e) => Save(this, e);
+            btnSave.Click += (s, e) => Update(this, e);
             btnNew.Click += (s, e) => Save(this, e);
             btnDelete.Click += (s, e) => Delete(this, e);
             this.FormClosed += (s, e) => ViewDispose(this, e);
@@ -49,59 +50,16 @@ namespace Example
             bindingSource.DataSource = p;
             bindingSource1.DataSource = p.City;
             textEdit2.Text = AutomobilesListToString(p.Automobiles).ToString();
-            textEdit1.Text = CertificateListToString(p.Certificates);
             btnSave.Enabled = true;
             btnNew.Enabled = true;
+            btnDelete.Enabled = true;
             myPerson = p;
             myPerson.Id = p.Id;
-            //IList<int> intL = new List<int>();
 
-            //foreach (Certificate c in p.Certificates)
-            //{
-            //    foreach (var pair in personCertif)
-            //    {
-            //        if (pair.Value == c)
-            //            intL .Add(pair.Key);
-
-            //        else 
-            //        {
-            //            intL .Add(13);
-            //        }
-            //    }
-            //}
-
-            //myPerson.Certificates.Count();
-
-            //for (int k = 0; k < myPerson.Certificates.Count; k++)
-            //{
-            //    listBoxControl1.SetSelected(k, true);
-            //    //listBoxControl1.SetSelected(personCertif.FirstOrDefault(x => x.Value == myPerson.Certificates[k]).Key + 1, true);
-            //}
-
-
-        }
-
-        private void btnAutoEdit_Click(object sender, EventArgs e)
-        {
-            PersonAutomobiles form = new PersonAutomobiles(myPerson);
-            form.ShowDialog();
-
-            textEdit2.Text = AutomobilesListToString(myPerson.Automobiles);
-            textEdit1.Text = CertificateListToString(myPerson.Certificates);
-
-        }
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            myPerson.City = personCity[comboBoxEdit1.SelectedIndex];
-
-            myPerson.Certificates = new List<Certificate>();
-
-
-            for (int i = 0; i < listBoxControl1.SelectedItems.Count; i++)
+            foreach (Certificate c in p.Certificates)
             {
-                myPerson.Certificates.Add(personCertif[listBoxControl1.SelectedIndices[i]]);
+                listBoxControl1.SetSelected(cache.GetIdGrid(c.Id), true);
             }
-
         }
 
         public string AutomobilesListToString(IList<Automobile> auto)
@@ -126,100 +84,118 @@ namespace Example
             return list.ToString(); ;
         }
 
-        private void btnExtra_Click(object sender, EventArgs e)
-        {
-            Extra form = new Extra(myPerson);
-            form.ShowDialog();
-        }
-
-        private void MainForm_Load_1(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             int i = 0;
             personCity = new Dictionary<int, City>();
             IList<City> allcity = new List<City>();
-            var nhConfig = new Configuration().Configure();
-            nhConfig.SetProperty(
-             "connection.connection_string", @"Data Source=(LocalDB)\v11.0;AttachDbFilename="
-             + System.Environment.GetEnvironmentVariable("DATABASE")
-             + ";Integrated Security=True;Connect Timeout=30");
-            nhConfig.AddAssembly(Assembly.GetExecutingAssembly());
-            var sessionFactory = nhConfig.BuildSessionFactory();
 
+            int j = 0;
+            // personCertif = new Dictionary<int, Certificate>();
+            // IList<Certificate> allcertif = new List<Certificate>();
 
+            cache = new ItemCache();
+
+            cache.Clear();
             using (RepositoryBase repository = new RepositoryBase())
             {
                 try
                 {
-                    //repository.BeginTransaction();
-
                     var city = repository.GetCity();
 
                     foreach (City c in city)
                     {
+
                         comboBoxEdit1.Properties.Items.Add(c.Name);
                         personCity.Add(i, c);
                         i++;
-
                     }
+
+                    var certificate = repository.GetCertificates();
+                    int m = 0;
+
+                    foreach (Certificate c in certificate)
+                    {
+
+                        //listBoxControl1.Items.Add(c.Name);
+                        cache.Add(listBoxControl1.Items.Add(c.Name), c);
+                        m = m + 1;
+                    }
+
                 }
-                catch 
+                catch
                 {
                     //repository.RollbackTransaction();
                 }
             }
 
+            listBoxControl1.SelectedIndex = -1;
+        }
 
-
-            //using (ISession session = sessionFactory.OpenSession())
-            //{
-            //    var city = session.CreateCriteria<City>().List<City>();
-
-            //    foreach (City c in city)
-            //    {
-            //        comboBoxEdit1.Properties.Items.Add(c.Name);
-            //        personCity.Add(i, c);
-            //        i++;
-
-            //    }
-            //}
-
-
-            int j = 0;
-            personCertif = new Dictionary<int, Certificate>();
-            IList<Certificate> allcertif = new List<Certificate>();
-
-
-            using (ISession session = sessionFactory.OpenSession())
+        private void btnExtra_Click(object sender, EventArgs e)
+        {
+            Extra form = new Extra(myPerson);
+            if (myPerson.Extra == null)
             {
-                var certificate = session.CreateCriteria<Certificate>().List<Certificate>();
+                myPerson.Extra = new AdditionalInformation();
+                form.ShowDialog();
+            }
+            else
+            {
+                form.ShowDialog();
+            }
+ 
+        }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            myPerson.City = personCity[comboBoxEdit1.SelectedIndex];
 
-                foreach (Certificate c in certificate)
-                {
+            myPerson.Certificates = new List<Certificate>();
 
-                    listBoxControl1.Items.Add(c.Name);
-                    personCertif.Add(j, c);
-                    j++;
+            List<int> selectedItemIndexes = new List<int>();
 
-                }
+            foreach (object o in listBoxControl1.SelectedItems)
+                selectedItemIndexes.Add(listBoxControl1.Items.IndexOf(o));
 
-                listBoxControl1.SelectedIndex = -1;
-
-
-                //for (int k = 0; k < listBoxControl1.SelectedItems.Count; k++)
-                //{
-                //    foreach(Certificate c in myPerson.Certificates)
-                //    listBoxControl1.SetSelected(personCertif.FirstOrDefault(x => x.Value == c).Key, true);
-                //    //myPerson.Certificates.Add(personCertif[listBoxControl1.SelectedIndices[i]]);
-                //}
-
-                //listBoxControl1.SetSelected(4, true);
-
-                // listBoxControl1.SetSelected(6, true);
-
+            foreach (int index in selectedItemIndexes)
+            {
+                myPerson.Certificates.Add(cache.GetCertificate(index));
             }
         }
 
-  
+        private void btnAutoEdit_Click(object sender, EventArgs e)
+        {
+            PersonAutomobiles form = new PersonAutomobiles(myPerson);
+            form.ShowDialog();
+
+            textEdit2.Text = AutomobilesListToString(myPerson.Automobiles);
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            myPerson.City = personCity[comboBoxEdit1.SelectedIndex];
+
+            myPerson.Certificates = new List<Certificate>();
+            IList<Automobile> auto = new List<Automobile>();
+            List<int> selectedItemIndexes = new List<int>();
+
+            foreach (object o in listBoxControl1.SelectedItems)
+                selectedItemIndexes.Add(listBoxControl1.Items.IndexOf(o));
+
+            foreach (int index in selectedItemIndexes)
+            {
+                myPerson.Certificates.Add(cache.GetCertificate(index));
+            }
+            foreach (Automobile a in myPerson.Automobiles)
+            {
+                auto.Add(new Automobile { Description = a.Description, Registration_number = a.Registration_number });
+            }
+            myPerson.Automobiles = auto;
+            int j = 0;
+        }
+
     }
+
 }
+

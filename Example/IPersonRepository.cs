@@ -10,5 +10,7 @@ namespace Example
     {
         Person GetPerson();
         void SavePerson(Person p);
+        void UpdatePerson(Person p);
+        void DeletePerson(Person p);
     }
 }

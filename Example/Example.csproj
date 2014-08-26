@@ -79,6 +79,7 @@
     <Compile Include="IPersonRepository.cs" />
     <Compile Include="IPersonView.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="ItemCache.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,14 +133,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="automobile.hbm.xml" />
-    <EmbeddedResource Include="additionalInformation.hbm.xml" />
-    <EmbeddedResource Include="certificate.hbm.xml" />
+    <EmbeddedResource Include="automobile.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="additionalInformation.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="certificate.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="hibernate.cfg.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="city.hbm.xml" />
+    <EmbeddedResource Include="city.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="person.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>

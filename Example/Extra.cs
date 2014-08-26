@@ -27,13 +27,15 @@ namespace Example
 
         private void Extra_Load(object sender, EventArgs e)
         {
-            bindingSource1.DataSource = myPerson.Extra;
+            txtBirthPlace.Text = myPerson.Extra.PlaceOfBirth;
             txtBirtDate.Text = myPerson.Extra.DateOfBirth.ToString();
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private void btnSaveExtra_Click(object sender, EventArgs e)
         {
-            myPerson.Extra = new AdditionalInformation { PlaceOfBirth = txtBirthPlace.Text, DateOfBirth = Convert.ToDateTime(txtBirtDate.Text), Id = myPerson.Extra.Id, Person_id = myPerson.Extra.Person_id };
+            myPerson.Extra = new AdditionalInformation { PlaceOfBirth = txtBirthPlace.Text, DateOfBirth = Convert.ToDateTime(txtBirtDate.Text) };
+            this.Close();
         }
+
     }
 }

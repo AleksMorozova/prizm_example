@@ -86,6 +86,7 @@
             this.btnaddcar.Size = new System.Drawing.Size(88, 25);
             this.btnaddcar.TabIndex = 26;
             this.btnaddcar.Text = "Add";
+            this.btnaddcar.Click += new System.EventHandler(this.btnaddcar_Click);
             // 
             // lblregistrnumb
             // 
@@ -124,6 +125,7 @@
             this.Deletebtn.Size = new System.Drawing.Size(83, 25);
             this.Deletebtn.TabIndex = 21;
             this.Deletebtn.Text = "Delete";
+            this.Deletebtn.Click += new System.EventHandler(this.Deletebtn_Click);
             // 
             // btnAutoEdit
             // 
@@ -132,6 +134,7 @@
             this.btnAutoEdit.Size = new System.Drawing.Size(88, 25);
             this.btnAutoEdit.TabIndex = 20;
             this.btnAutoEdit.Text = "Edit...";
+            this.btnAutoEdit.Click += new System.EventHandler(this.btnAutoEdit_Click);
             // 
             // PersonAutomobiles
             // 
@@ -148,6 +151,7 @@
             this.Controls.Add(this.Automobiles);
             this.Name = "PersonAutomobiles";
             this.Text = "PersonAutomobiles";
+            this.Load += new System.EventHandler(this.PersonAutomobiles_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Automobiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.registrnumbtxtEdit.Properties)).EndInit();

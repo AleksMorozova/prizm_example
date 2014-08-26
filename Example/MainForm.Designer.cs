@@ -46,19 +46,18 @@
             this.btnExtra = new DevExpress.XtraEditors.SimpleButton();
             this.btnAutoEdit = new DevExpress.XtraEditors.SimpleButton();
             this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAge.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFirstName
@@ -145,7 +144,7 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(46, 191);
+            this.labelControl2.Location = new System.Drawing.Point(46, 263);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(26, 13);
             this.labelControl2.TabIndex = 11;
@@ -153,7 +152,8 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(195, 191);
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(195, 263);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 25;
@@ -162,18 +162,19 @@
             // btnNew
             // 
             this.btnNew.Enabled = false;
-            this.btnNew.Location = new System.Drawing.Point(12, 191);
+            this.btnNew.Location = new System.Drawing.Point(12, 263);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 23);
             this.btnNew.TabIndex = 24;
             this.btnNew.Text = "New";
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // listBoxControl1
             // 
             this.listBoxControl1.CausesValidation = false;
             this.listBoxControl1.ColumnWidth = 75;
             this.listBoxControl1.HotTrackSelectMode = DevExpress.XtraEditors.HotTrackSelectMode.SelectItemOnClick;
-            this.listBoxControl1.Location = new System.Drawing.Point(91, 235);
+            this.listBoxControl1.Location = new System.Drawing.Point(93, 152);
             this.listBoxControl1.MultiColumn = true;
             this.listBoxControl1.Name = "listBoxControl1";
             this.listBoxControl1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
@@ -182,7 +183,7 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(290, 191);
+            this.btnLoad.Location = new System.Drawing.Point(290, 263);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 23);
             this.btnLoad.TabIndex = 22;
@@ -191,11 +192,12 @@
             // btnSave
             // 
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(105, 191);
+            this.btnSave.Location = new System.Drawing.Point(105, 263);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 21;
             this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnExtra
             // 
@@ -204,14 +206,16 @@
             this.btnExtra.Size = new System.Drawing.Size(75, 23);
             this.btnExtra.TabIndex = 27;
             this.btnExtra.Text = "Extra";
+            this.btnExtra.Click += new System.EventHandler(this.btnExtra_Click);
             // 
             // btnAutoEdit
             // 
-            this.btnAutoEdit.Location = new System.Drawing.Point(290, 96);
+            this.btnAutoEdit.Location = new System.Drawing.Point(293, 123);
             this.btnAutoEdit.Name = "btnAutoEdit";
             this.btnAutoEdit.Size = new System.Drawing.Size(75, 23);
             this.btnAutoEdit.TabIndex = 26;
             this.btnAutoEdit.Text = "Edit...";
+            this.btnAutoEdit.Click += new System.EventHandler(this.btnAutoEdit_Click);
             // 
             // comboBoxEdit1
             // 
@@ -223,14 +227,6 @@
             this.comboBoxEdit1.Size = new System.Drawing.Size(179, 20);
             this.comboBoxEdit1.TabIndex = 28;
             // 
-            // textEdit1
-            // 
-            this.textEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.bindingSource, "LastName", true));
-            this.textEdit1.Location = new System.Drawing.Point(93, 165);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(179, 20);
-            this.textEdit1.TabIndex = 29;
-            // 
             // labelControl3
             // 
             this.labelControl3.Location = new System.Drawing.Point(33, 129);
@@ -239,21 +235,29 @@
             this.labelControl3.TabIndex = 30;
             this.labelControl3.Text = "Cars:";
             // 
-            // bindingSource
+            // labelControl4
             // 
-            this.bindingSource.DataSource = typeof(Example.Person);
+            this.labelControl4.Location = new System.Drawing.Point(33, 161);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(54, 13);
+            this.labelControl4.TabIndex = 31;
+            this.labelControl4.Text = "Certificate:";
             // 
             // bindingSource1
             // 
             this.bindingSource1.DataSource = typeof(Example.City);
             // 
+            // bindingSource
+            // 
+            this.bindingSource.DataSource = typeof(Example.Person);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 338);
+            this.ClientSize = new System.Drawing.Size(380, 301);
+            this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.labelControl3);
-            this.Controls.Add(this.textEdit1);
             this.Controls.Add(this.comboBoxEdit1);
             this.Controls.Add(this.btnExtra);
             this.Controls.Add(this.btnAutoEdit);
@@ -273,16 +277,15 @@
             this.Controls.Add(this.lblFirstName);
             this.Name = "MainForm";
             this.Text = "Person App";
-            this.Load += new System.EventHandler(this.MainForm_Load_1);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAge.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,8 +312,8 @@
         private DevExpress.XtraEditors.SimpleButton btnExtra;
         private DevExpress.XtraEditors.SimpleButton btnAutoEdit;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
         private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
     }
 }
 

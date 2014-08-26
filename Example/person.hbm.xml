@@ -17,22 +17,15 @@
     class="City" fetch="join" />
 
     <one-to-one name="Extra" class ="AdditionalInformation" cascade="all" />
-    <!--  -->
-    <bag name="Automobiles" cascade="all">
+   
+    <bag name="Automobiles" table="automobile" cascade="all-delete-orphan" inverse="true" lazy="false">
       <key>
-        <column name="Person_id"/>
+        <column name="person_id"/>
       </key>
       <one-to-many class="Automobile" />
     </bag>
 
-    <!--
-      <bag name=" Certificates" inverse="false" cascade="all" lazy="true" >
-        <key>cascade="all-delete-orphan"
-          <column name="id"/>
-        </key>
-    <many-to-many class="Certificate" />
-  </bag>
-     -->
+
     <bag name="Certificates" table="person_certificate"   lazy="false" >
       <key column="person_id" />
       <many-to-many class="Certificate" column="certificate_id"

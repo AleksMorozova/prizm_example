@@ -33,7 +33,7 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtBirthPlace = new DevExpress.XtraEditors.TextEdit();
             this.txtBirtDate = new DevExpress.XtraEditors.TextEdit();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSaveExtra = new DevExpress.XtraEditors.SimpleButton();
             this.additionalInformationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtBirthPlace.Properties)).BeginInit();
@@ -72,13 +72,14 @@
             this.txtBirtDate.Size = new System.Drawing.Size(166, 20);
             this.txtBirtDate.TabIndex = 7;
             // 
-            // simpleButton1
+            // btnSaveExtra
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(194, 111);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
-            this.simpleButton1.TabIndex = 6;
-            this.simpleButton1.Text = "simpleButton1";
+            this.btnSaveExtra.Location = new System.Drawing.Point(194, 111);
+            this.btnSaveExtra.Name = "btnSaveExtra";
+            this.btnSaveExtra.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveExtra.TabIndex = 6;
+            this.btnSaveExtra.Text = "SaveExtra";
+            this.btnSaveExtra.Click += new System.EventHandler(this.btnSaveExtra_Click);
             // 
             // Extra
             // 
@@ -89,9 +90,10 @@
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txtBirthPlace);
             this.Controls.Add(this.txtBirtDate);
-            this.Controls.Add(this.simpleButton1);
+            this.Controls.Add(this.btnSaveExtra);
             this.Name = "Extra";
             this.Text = "Extra";
+            this.Load += new System.EventHandler(this.Extra_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtBirthPlace.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBirtDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.additionalInformationBindingSource)).EndInit();
@@ -107,7 +109,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txtBirthPlace;
         private DevExpress.XtraEditors.TextEdit txtBirtDate;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton btnSaveExtra;
         private System.Windows.Forms.BindingSource additionalInformationBindingSource;
         private System.Windows.Forms.BindingSource bindingSource1;
     }

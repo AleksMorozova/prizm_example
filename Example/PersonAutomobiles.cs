@@ -30,29 +30,25 @@ namespace Example
             Automobiles.DataSource = myPerson.Automobiles;
         }
 
-        private void btnAutoEdit_Click(object sender, EventArgs e)
-        {
-
-            Automobiles.RefreshDataSource();
-
-            MainForm form = new MainForm();
-            form.myPerson = myPerson;
-
-            form.Refresh();
-        }
-
         private void Deletebtn_Click(object sender, EventArgs e)
         {
             this.gridView1.DeleteRow(this.gridView1.FocusedRowHandle);
         }
 
+        private void btnAutoEdit_Click(object sender, EventArgs e)
+        {
+            Automobiles.RefreshDataSource();
+            MainForm form = new MainForm();
+            form.myPerson = myPerson;
+            this.Close();
+        }
+
         private void btnaddcar_Click(object sender, EventArgs e)
         {
-            Automobile auto = new Automobile { Description = descriptiontxtEdit.Text, Registration_number = registrnumbtxtEdit.Text };
+            Automobile auto = new Automobile { Description = descriptiontxtEdit.Text, Registration_number = registrnumbtxtEdit.Text, Person_id=this.myPerson.Id};
             myPerson.Automobiles.Add(auto);
             Automobiles.RefreshDataSource();
         }
 
-        //void SetAutomobiles(/* ??? */) { bindingSource.DataSource = ???; }
     }
 }

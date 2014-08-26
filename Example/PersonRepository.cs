@@ -20,18 +20,9 @@ namespace Example
         /// <returns></returns>
         public Person GetPerson()
         {
-            var nhConfig = new NHCfg.Configuration().Configure();
-            nhConfig.SetProperty(
-               "connection.connection_string", @"Data Source=(LocalDB)\v11.0;AttachDbFilename="
-               + System.Environment.GetEnvironmentVariable("DATABASE")
-               + ";Integrated Security=True;Connect Timeout=30");
-            nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
-            var sessionFactory = nhConfig.BuildSessionFactory();
-
-            using (NH.ISession session = sessionFactory.OpenSession())
+            using (RepositoryBase repository = new RepositoryBase())
             {
-                var prof = session.QueryOver<Person>().Where(x => x.FirstName == "Tom")
-                    .SingleOrDefault();
+                Person prof = repository.GetPerson();
 
                 p = prof;
                 p.City = prof.City;
@@ -48,7 +39,7 @@ namespace Example
                         p.PersonAutomobiles.Add(auto);
                     }
                 }
-
+                repository.CloseSession();
             }
 
 
@@ -72,73 +63,42 @@ namespace Example
         /// <returns></returns>
         public void SavePerson(Person p)
         {
-            p.Id = 2;
-            var nhConfig = new NHCfg.Configuration().Configure();
-            nhConfig.SetProperty(
-              "connection.connection_string", @"Data Source=(LocalDB)\v11.0;AttachDbFilename="
-              + System.Environment.GetEnvironmentVariable("DATABASE")
-              + ";Integrated Security=True;Connect Timeout=30");
-            nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
+            Person person = new Person();
 
-            var sessionFactory = nhConfig.BuildSessionFactory();
-
-            using (NH.ISession session = sessionFactory.OpenSession())
+            using (RepositoryBase repository = new RepositoryBase())
             {
-                using (NH.ITransaction transaction = session.BeginTransaction())
+
+                repository.BeginTransaction();
+
+                person.Age = p.Age;
+                person.FirstName = p.FirstName;
+                person.LastName = p.LastName;
+
+                repository.Save(person);
+
+                person.City = new City { Name = p.City.Name, Id = p.City.Id };
+                person.Extra = new AdditionalInformation { DateOfBirth = p.Extra.DateOfBirth, PlaceOfBirth = p.Extra.PlaceOfBirth, Person_id = person.Id };
+
+
+                person.Certificates = new List<Certificate>();
+
+                foreach (Certificate newCertif in p.Certificates)
                 {
-
-                    session.Update(p);
-                    transaction.Commit();
+                    person.Certificates.Add(new Certificate { Name = newCertif.Name, Id = newCertif.Id });
                 }
+
+                person.Automobiles = new List<Automobile>();
+
+                foreach (Automobile newAuto in p.Automobiles)
+                {
+                    person.Automobiles.Add(new Automobile { Description = newAuto.Description, Person_id = person.Id, Registration_number = newAuto.Registration_number });
+                }
+
+                repository.Save(person);
+                
+                repository.CommitTransaction();
+                repository.CloseSession();
             }
-
-            //Person person = new Person();
-            //person.Id = p.Id;
-
-            //person.Age = p.Age;
-            //person.FirstName = p.FirstName;
-            //person.LastName = p.LastName;
-            ////person.City
-
-
-            //var nhConfig = new NHCfg.Configuration().Configure();
-            //nhConfig.SetProperty(
-            //  "connection.connection_string", @"Data Source=(LocalDB)\v11.0;AttachDbFilename="
-            //  + System.Environment.GetEnvironmentVariable("DATABASE")
-            //  + ";Integrated Security=True;Connect Timeout=30");
-            //nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
-
-            //var sessionFactory = nhConfig.BuildSessionFactory();
-
-            //using (NH.ISession session = sessionFactory.OpenSession())
-            //{
-            //    using (NH.ITransaction transaction = session.BeginTransaction())
-            //    {
-
-            //        session.SaveOrUpdate(person);
-
-            //        person.City = new City { Name = p.City.Name, Id=p.City.Id};
-
-            //        person.Certificates = new List<Certificate>();
-
-            //        foreach (Certificate newCertif in p.Certificates)
-            //        {
-            //            person.Certificates.Add(new Certificate { Name=newCertif.Name, Id=newCertif.Id});
-            //        }
-
-            //        person.Automobiles = new List<Automobile>();
-
-            //        foreach (Automobile newAuto in p.Automobiles)
-            //        {
-            //            person.Automobiles.Add(new Automobile { Description = newAuto.Description, Registration_number = newAuto.Registration_number, Person_id = person.Id });
-            //        }
-
-            //        session.SaveOrUpdate(person);
-
-            //        transaction.Commit();
-            //    }
-
-            //}
         }
 
 
@@ -148,40 +108,26 @@ namespace Example
         /// <returns></returns>
         public void UpdatePerson(Person p)
         {
+
             using (RepositoryBase repository = new RepositoryBase())
             {
                 try
                 {
                     repository.BeginTransaction();
                     p.Id = this.p.Id;
+
+                    foreach (Automobile a in p.Automobiles)
+                    {
+                        a.Person_id = this.p.Id;
+                    }
+
                     repository.Update(p);
                 }
-                catch 
+                catch
                 {
                     repository.RollbackTransaction();
                 }
             }
-
-            //var nhConfig = new NHCfg.Configuration().Configure();
-            //nhConfig.SetProperty(
-            //  "connection.connection_string", @"Data Source=(LocalDB)\v11.0;AttachDbFilename="
-            //  + System.Environment.GetEnvironmentVariable("DATABASE")
-            //  + ";Integrated Security=True;Connect Timeout=30");
-            //nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
-
-            //var sessionFactory = nhConfig.BuildSessionFactory();
-
-            //p.Id = this.p.Id;
-
-            //using (NH.ISession session = sessionFactory.OpenSession())
-            //{
-            //    using (NH.ITransaction transaction = session.BeginTransaction())
-            //    {
-
-            //        session.Update(p);
-            //        transaction.Commit();
-            //    }
-            //}
         }
 
 
@@ -191,26 +137,17 @@ namespace Example
         /// <returns></returns>
         public void DeletePerson(Person p)
         {
-
-
-            var nhConfig = new NHCfg.Configuration().Configure();
-            nhConfig.SetProperty(
-              "connection.connection_string", @"Data Source=(LocalDB)\v11.0;AttachDbFilename="
-              + System.Environment.GetEnvironmentVariable("DATABASE")
-              + ";Integrated Security=True;Connect Timeout=30");
-            nhConfig.AddAssembly(SRef.Assembly.GetExecutingAssembly());
-
-            var sessionFactory = nhConfig.BuildSessionFactory();
-
-            p.Id = this.p.Id;
-
-            using (NH.ISession session = sessionFactory.OpenSession())
+            using (RepositoryBase repository = new RepositoryBase())
             {
-                using (NH.ITransaction transaction = session.BeginTransaction())
+                try
                 {
-
-                    session.Delete(p);
-                    transaction.Commit();
+                    repository.BeginTransaction();
+                    p.Id = this.p.Id;
+                    repository.Delete(p);
+                }
+                catch
+                {
+                    repository.RollbackTransaction();
                 }
             }
         }

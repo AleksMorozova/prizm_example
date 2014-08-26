@@ -25,7 +25,9 @@ namespace Example
         private void SubscribeToEvents()
         {
             view.Save += view_Save;
+            view.Delete+=view_Delete;
             view.Load += view_Load;
+            view.Update+=view_Update;
             view.ViewDispose += view_ViewDispose;
         }
 
@@ -54,6 +56,32 @@ namespace Example
                 view.ShowValidationError(error);
             }
         }
+        private void view_Delete(object sender, EventArgs e)
+        {
+            string error = ValidatePerson();
+
+            if (String.IsNullOrEmpty(error))
+            {
+                personRepo.DeletePerson(person);
+            }
+            else
+            {
+                view.ShowValidationError(error);
+            }
+        }
+        private void view_Update(object sender, EventArgs e)
+        {
+            string error = ValidatePerson();
+
+            if (String.IsNullOrEmpty(error))
+            {
+                personRepo.UpdatePerson(person);
+            }
+            else
+            {
+                view.ShowValidationError(error);
+            }
+        }
 
         public string ValidatePerson()
         {
@@ -72,6 +100,8 @@ namespace Example
         {
             view.Save -= view_Save;
             view.Load -= view_Load;
+            view.Update -= view_Update;
+            view.Delete -= view_Delete;
             view.ViewDispose -= view_ViewDispose;
         }
     }
