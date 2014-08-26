@@ -33,6 +33,7 @@ namespace Example
             this.components = new System.ComponentModel.Container();
             this.lblFirstName = new DevExpress.XtraEditors.LabelControl();
             this.txtLastName = new DevExpress.XtraEditors.TextEdit();
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.spinAge = new DevExpress.XtraEditors.SpinEdit();
             this.lblAge = new DevExpress.XtraEditors.LabelControl();
             this.lblLastName = new DevExpress.XtraEditors.LabelControl();
@@ -48,18 +49,17 @@ namespace Example
             this.btnExtra = new DevExpress.XtraEditors.SimpleButton();
             this.btnAutoEdit = new DevExpress.XtraEditors.SimpleButton();
             this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAge.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFirstName
@@ -77,6 +77,10 @@ namespace Example
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(179, 20);
             this.txtLastName.TabIndex = 1;
+            // 
+            // bindingSource
+            // 
+            this.bindingSource.DataSource = typeof(Example.Entities.Person);
             // 
             // spinAge
             // 
@@ -160,6 +164,7 @@ namespace Example
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 25;
             this.btnDelete.Text = "Delete";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnNew
             // 
@@ -203,6 +208,7 @@ namespace Example
             // 
             // btnExtra
             // 
+            this.btnExtra.Enabled = false;
             this.btnExtra.Location = new System.Drawing.Point(290, 15);
             this.btnExtra.Name = "btnExtra";
             this.btnExtra.Size = new System.Drawing.Size(75, 23);
@@ -212,6 +218,7 @@ namespace Example
             // 
             // btnAutoEdit
             // 
+            this.btnAutoEdit.Enabled = false;
             this.btnAutoEdit.Location = new System.Drawing.Point(293, 123);
             this.btnAutoEdit.Name = "btnAutoEdit";
             this.btnAutoEdit.Size = new System.Drawing.Size(75, 23);
@@ -229,6 +236,10 @@ namespace Example
             this.comboBoxEdit1.Size = new System.Drawing.Size(179, 20);
             this.comboBoxEdit1.TabIndex = 28;
             // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = typeof(Example.Entities.City);
+            // 
             // labelControl3
             // 
             this.labelControl3.Location = new System.Drawing.Point(33, 129);
@@ -244,14 +255,6 @@ namespace Example
             this.labelControl4.Size = new System.Drawing.Size(54, 13);
             this.labelControl4.TabIndex = 31;
             this.labelControl4.Text = "Certificate:";
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = typeof(Example.Entities.City);
-            // 
-            // bindingSource
-            // 
-            this.bindingSource.DataSource = typeof(Example.Entities.Person);
             // 
             // MainForm
             // 
@@ -281,13 +284,13 @@ namespace Example
             this.Text = "Person App";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtLastName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAge.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFirstName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

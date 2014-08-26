@@ -55,6 +55,8 @@ namespace Example
             btnSave.Enabled = true;
             btnNew.Enabled = true;
             btnDelete.Enabled = true;
+            btnExtra.Enabled = true;
+            btnAutoEdit.Enabled = true;
             myPerson = p;
             myPerson.Id = p.Id;
 
@@ -177,6 +179,11 @@ namespace Example
             }
             myPerson.Automobiles = auto;
            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int a = 0;
         }
 
     }

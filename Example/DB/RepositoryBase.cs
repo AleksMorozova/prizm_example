@@ -32,6 +32,7 @@ namespace Example.DB
             _transaction = _session.BeginTransaction();
         }
 
+
         public void CommitTransaction()
         {
             // _transaction will be replaced with a new transaction
@@ -51,11 +52,12 @@ namespace Example.DB
             CloseSession();
         }
 
-        private void CloseTransaction()
+        public void CloseTransaction()
         {
             _transaction.Dispose();
             _transaction = null;
         }
+
 
         public void CloseSession()
         {

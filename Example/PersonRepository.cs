@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Example.Entities;
 using Example.DB;
+using NHibernate;
+using System.Reflection;
+using NHibernate.Cfg;
 
 
 namespace Example
@@ -96,6 +99,7 @@ namespace Example
                     repository.CommitTransaction();
 
                     repository.CloseSession();
+
                 }
                 catch (Exception) 
                 {
@@ -130,6 +134,7 @@ namespace Example
 
                     repository.CommitTransaction();
                     repository.CloseSession();
+                    
                 }
                 catch(Exception)
                 {
@@ -152,6 +157,8 @@ namespace Example
                     repository.BeginTransaction();
                     p.Id = this.p.Id;
                     repository.Delete(p);
+                    
+                    repository.CommitTransaction();
                     repository.CloseSession();
                 }
                 catch (Exception)

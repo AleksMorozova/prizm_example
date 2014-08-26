@@ -33,8 +33,11 @@ namespace Example
         }
 
         private void Deletebtn_Click(object sender, EventArgs e)
-        {
+        {  
             this.gridView1.DeleteRow(this.gridView1.FocusedRowHandle);
+            Automobiles.RefreshDataSource();
+            //myPerson.Automobiles.RemoveAt();
+            int l = 0;
         }
 
         private void btnAutoEdit_Click(object sender, EventArgs e)

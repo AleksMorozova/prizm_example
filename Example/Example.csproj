@@ -69,7 +69,7 @@
     <Compile Include="Entities\Automobile.cs" />
     <Compile Include="Entities\Certificate.cs" />
     <Compile Include="Entities\City.cs" />
-    <Compile Include="Database.cs" />
+    <Compile Include="DB\Database.cs" />
     <Compile Include="Extra.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -29,7 +29,6 @@ namespace Example
                     nhConfig.AddAssembly(Assembly.GetExecutingAssembly());
                     _sessionFactory = nhConfig.BuildSessionFactory();
 
-
                 }
 
                 return _sessionFactory;
