@@ -18,7 +18,7 @@ namespace Example
         public Dictionary<int, City> personCity;
         public Dictionary<int, Certificate> personCertif;
         public Person myPerson;
-        public ItemCache cache;
+        public ItemCache<Certificate> cache;
 
         public MainForm()
         {
@@ -91,10 +91,8 @@ namespace Example
             IList<City> allcity = new List<City>();
 
             int j = 0;
-            // personCertif = new Dictionary<int, Certificate>();
-            // IList<Certificate> allcertif = new List<Certificate>();
-
-            cache = new ItemCache();
+          
+            cache = new ItemCache<Certificate>();
 
             cache.Clear();
             using (RepositoryBase repository = new RepositoryBase())
@@ -112,20 +110,17 @@ namespace Example
                     }
 
                     var certificate = repository.GetCertificates();
-                    int m = 0;
 
                     foreach (Certificate c in certificate)
                     {
-
-                        //listBoxControl1.Items.Add(c.Name);
-                        cache.Add(listBoxControl1.Items.Add(c.Name), c);
-                        m = m + 1;
+                        cache.Add(listBoxControl1.Items.Add(c.Name), c.Id, c);
+                        
                     }
 
                 }
-                catch
+                catch (Exception)
                 {
-                    //repository.RollbackTransaction();
+                    repository.RollbackTransaction();
                 }
             }
 
@@ -192,7 +187,7 @@ namespace Example
                 auto.Add(new Automobile { Description = a.Description, Registration_number = a.Registration_number });
             }
             myPerson.Automobiles = auto;
-            int j = 0;
+           
         }
 
     }

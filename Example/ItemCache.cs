@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Example
 {
-    public class ItemCache
+    public class ItemCache<T> where T : class
     {
-        private SortedList<int, Certificate> GridToObj;
+        private SortedList<int, T> GridToObj;
         private SortedList<int, int> DBIdToGrid;
 
         public ItemCache() 
         {
-            GridToObj  = new SortedList<int, Certificate> ();
+            GridToObj  = new SortedList<int, T> ();
             DBIdToGrid= new SortedList<int, int>();
         }
 
-        public void Add(int idGrid, Certificate cInstance)
+        public void Add(int idGrid,  int idDB, T cInstance)
         {
             GridToObj.Add(idGrid, cInstance);
-            DBIdToGrid.Add(cInstance.Id, idGrid);
+            DBIdToGrid.Add(idDB, idGrid);
         }
 
 
@@ -30,7 +30,7 @@ namespace Example
         }
 
 
-        public Certificate GetCertificate(int idGrid)
+        public T GetCertificate(int idGrid)
         {
             return GridToObj[idGrid];
         }
