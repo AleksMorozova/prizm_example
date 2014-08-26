@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Example.Entities;
 
-namespace Example
+namespace Example.DB
 {
     public interface IRepository
     {
@@ -12,6 +13,5 @@ namespace Example
         void Delete(object obj);
         void Update(object obj);
         IList<City> GetCity();
-       // IQueryable<TEntity> ToList<TEntity>();
     }
 }

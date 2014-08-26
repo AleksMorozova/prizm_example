@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Example
+namespace Example.Entities
 {
     /// <summary>
     /// DOMAIN MODEL CLASS (will be mapped with Hibernate)
@@ -19,7 +19,7 @@ namespace Example
         private City city;
 
         private AdditionalInformation extra;
-        private IList<Automobile> automobiles;//=new List<Automobile>();
+        private IList<Automobile> automobiles;
         private IList<Automobile> personAutomobiles;
 
         private IList<Certificate> certificates;

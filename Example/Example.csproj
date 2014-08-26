@@ -65,10 +65,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdditionalInformation.cs" />
-    <Compile Include="Automobile.cs" />
-    <Compile Include="Certificate.cs" />
-    <Compile Include="City.cs" />
+    <Compile Include="Entities\AdditionalInformation.cs" />
+    <Compile Include="Entities\Automobile.cs" />
+    <Compile Include="Entities\Certificate.cs" />
+    <Compile Include="Entities\City.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Extra.cs">
       <SubType>Form</SubType>
@@ -78,7 +78,7 @@
     </Compile>
     <Compile Include="IPersonRepository.cs" />
     <Compile Include="IPersonView.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="DB\IRepository.cs" />
     <Compile Include="ItemCache.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -86,7 +86,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Person.cs" />
+    <Compile Include="Entities\Person.cs" />
     <Compile Include="PersonAutomobiles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,7 +97,7 @@
     <Compile Include="PersonRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryBase.cs" />
+    <Compile Include="DB\RepositoryBase.cs" />
     <EmbeddedResource Include="Extra.resx">
       <DependentUpon>Extra.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,26 +133,27 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="automobile.hbm.xml">
+    <EmbeddedResource Include="mapping\automobile.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="additionalInformation.hbm.xml">
+    <EmbeddedResource Include="mapping\additionalInformation.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="certificate.hbm.xml">
+    <EmbeddedResource Include="mapping\certificate.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="hibernate.cfg.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="city.hbm.xml">
+    <EmbeddedResource Include="mapping\city.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="person.hbm.xml">
+    <EmbeddedResource Include="mapping\person.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

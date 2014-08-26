@@ -1,4 +1,6 @@
-﻿namespace Example
+﻿using Example.Entities;
+
+namespace Example
 {
     partial class MainForm
     {
@@ -245,11 +247,11 @@
             // 
             // bindingSource1
             // 
-            this.bindingSource1.DataSource = typeof(Example.City);
+            this.bindingSource1.DataSource = typeof(Example.Entities.City);
             // 
             // bindingSource
             // 
-            this.bindingSource.DataSource = typeof(Example.Person);
+            this.bindingSource.DataSource = typeof(Example.Entities.Person);
             // 
             // MainForm
             // 

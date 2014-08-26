@@ -78,7 +78,7 @@
             this.btnSaveExtra.Name = "btnSaveExtra";
             this.btnSaveExtra.Size = new System.Drawing.Size(75, 23);
             this.btnSaveExtra.TabIndex = 6;
-            this.btnSaveExtra.Text = "SaveExtra";
+            this.btnSaveExtra.Text = "OK";
             this.btnSaveExtra.Click += new System.EventHandler(this.btnSaveExtra_Click);
             // 
             // Extra

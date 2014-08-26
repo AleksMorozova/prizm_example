@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Example
+namespace Example.Entities
 {
-    public class Certificate : INotifyPropertyChanged, ICloneable
+    public class City : INotifyPropertyChanged, ICloneable
     {
         private string name;
         private int id;
+      
 
         public virtual string Name
         {
@@ -43,6 +45,7 @@ namespace Example
             }
         }
 
+        
         private void RaisePropertyChanged(string propName)
         {
             if (PropertyChanged != null)
@@ -58,7 +61,6 @@ namespace Example
             return new City
             {
                 Name = this.name,
-
                 Id = this.id,
             };
         }

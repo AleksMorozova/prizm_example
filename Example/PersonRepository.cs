@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Example.Entities;
+using Example.DB;
 
-using NH    = NHibernate;
-using NHCfg = NHibernate.Cfg;
-using SRef  = System.Reflection;
 
 namespace Example
 {
@@ -67,37 +66,42 @@ namespace Example
 
             using (RepositoryBase repository = new RepositoryBase())
             {
+                try 
+                { 
+                    repository.BeginTransaction();
+                    person.Age = p.Age;
+                    person.FirstName = p.FirstName;
+                    person.LastName = p.LastName;
 
-                repository.BeginTransaction();
+                    repository.Save(person);
 
-                person.Age = p.Age;
-                person.FirstName = p.FirstName;
-                person.LastName = p.LastName;
-
-                repository.Save(person);
-
-                person.City = new City { Name = p.City.Name, Id = p.City.Id };
-                person.Extra = new AdditionalInformation { DateOfBirth = p.Extra.DateOfBirth, PlaceOfBirth = p.Extra.PlaceOfBirth, Person_id = person.Id };
-
-
-                person.Certificates = new List<Certificate>();
-
-                foreach (Certificate newCertif in p.Certificates)
-                {
-                    person.Certificates.Add(new Certificate { Name = newCertif.Name, Id = newCertif.Id });
-                }
-
-                person.Automobiles = new List<Automobile>();
-
-                foreach (Automobile newAuto in p.Automobiles)
-                {
-                    person.Automobiles.Add(new Automobile { Description = newAuto.Description, Person_id = person.Id, Registration_number = newAuto.Registration_number });
-                }
-
-                repository.Save(person);
+                    person.City = new City { Name = p.City.Name, Id = p.City.Id };
+                    person.Extra = new AdditionalInformation { DateOfBirth = p.Extra.DateOfBirth, PlaceOfBirth = p.Extra.PlaceOfBirth, Person_id = person.Id };
                 
-                repository.CommitTransaction();
-                repository.CloseSession();
+                    person.Certificates = new List<Certificate>();
+
+                    foreach (Certificate newCertif in p.Certificates)
+                    {
+                        person.Certificates.Add(new Certificate { Name = newCertif.Name, Id = newCertif.Id });
+                    }
+
+                    person.Automobiles = new List<Automobile>();
+
+                    foreach (Automobile newAuto in p.Automobiles)
+                    {
+                        person.Automobiles.Add(new Automobile { Description = newAuto.Description, Person_id = person.Id, Registration_number = newAuto.Registration_number });
+                    }
+                    repository.Save(person);
+                
+                    repository.CommitTransaction();
+
+                    repository.CloseSession();
+                }
+                catch (Exception) 
+                {
+                    repository.RollbackTransaction();
+                }
+               
             }
         }
 
@@ -121,9 +125,13 @@ namespace Example
                         a.Person_id = this.p.Id;
                     }
 
+                    p.Extra.Person_id = this.p.Id;
                     repository.Update(p);
+
+                    repository.CommitTransaction();
+                    repository.CloseSession();
                 }
-                catch
+                catch(Exception)
                 {
                     repository.RollbackTransaction();
                 }
@@ -144,8 +152,9 @@ namespace Example
                     repository.BeginTransaction();
                     p.Id = this.p.Id;
                     repository.Delete(p);
+                    repository.CloseSession();
                 }
-                catch
+                catch (Exception)
                 {
                     repository.RollbackTransaction();
                 }

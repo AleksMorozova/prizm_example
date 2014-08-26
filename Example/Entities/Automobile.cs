@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Example
+namespace Example.Entities
 {
     public class Automobile
     {

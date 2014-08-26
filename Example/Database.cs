@@ -7,7 +7,6 @@ using NHibernate;
 using NHibernate.Cfg;
 using System.Reflection;
 
-
 namespace Example
 {
     public static class Database

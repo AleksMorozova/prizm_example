@@ -5,8 +5,10 @@ using System.Text;
 using NHibernate;
 using NHibernate.Linq;
 using System.Threading.Tasks;
+using Example.Entities;
 
-namespace Example
+
+namespace Example.DB
 {
     public class RepositoryBase : IRepository, IDisposable
     {

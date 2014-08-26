@@ -10,6 +10,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Example.Entities;
+using Example.DB;
 
 namespace Example
 {
@@ -86,21 +88,17 @@ namespace Example
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            int i = 0;
             personCity = new Dictionary<int, City>();
             IList<City> allcity = new List<City>();
-
-            int j = 0;
           
             cache = new ItemCache<Certificate>();
 
-            cache.Clear();
             using (RepositoryBase repository = new RepositoryBase())
             {
                 try
                 {
                     var city = repository.GetCity();
-
+                    int i = 0;
                     foreach (City c in city)
                     {
 
@@ -130,16 +128,7 @@ namespace Example
         private void btnExtra_Click(object sender, EventArgs e)
         {
             Extra form = new Extra(myPerson);
-            if (myPerson.Extra == null)
-            {
-                myPerson.Extra = new AdditionalInformation();
-                form.ShowDialog();
-            }
-            else
-            {
-                form.ShowDialog();
-            }
- 
+            form.ShowDialog();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
