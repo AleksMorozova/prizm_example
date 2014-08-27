@@ -8,7 +8,7 @@ using Example.DB;
 using NHibernate;
 using System.Reflection;
 using NHibernate.Cfg;
-
+using log4net;
 
 namespace Example
 {
@@ -24,39 +24,20 @@ namespace Example
         {
             using (RepositoryBase repository = new RepositoryBase())
             {
+
                 Person prof = repository.GetPerson();
-
                 p = prof;
-                p.City = prof.City;
-
-                if (prof.Automobiles == null)
-                {
-                    p.PersonAutomobiles.Add(new Automobile { Description = "None", Registration_number = "None", Person_id = prof.Id });
-                }
-                else
-                {
-                    p.PersonAutomobiles = new List<Automobile>();
+                
+                p.PersonAutomobiles = new List<Automobile>();
                     foreach (Automobile auto in prof.Automobiles)
                     {
                         p.PersonAutomobiles.Add(auto);
                     }
-                }
+
                 repository.CloseSession();
-            }
 
-
-            if (p == null)
-            {
-                p = new Person();
-                p.LastName = "Petrov";
-                p.FirstName = "Inan";
-                p.Age = 42;
-                City c = new City();
-                c.Name = "None";
-                c.Id = 0;
-                p.City = c;
+                return (Person)p.Clone();
             }
-            return (Person)p.Clone();
         }
 
         /// <summary>
@@ -116,7 +97,6 @@ namespace Example
         /// <returns></returns>
         public void UpdatePerson(Person p)
         {
-
             using (RepositoryBase repository = new RepositoryBase())
             {
                 try
@@ -152,19 +132,18 @@ namespace Example
         {
             using (RepositoryBase repository = new RepositoryBase())
             {
-                try
-                {
+                //try
+                //{
                     repository.BeginTransaction();
                     p.Id = this.p.Id;
                     repository.Delete(p);
-                    
                     repository.CommitTransaction();
                     repository.CloseSession();
-                }
-                catch (Exception)
-                {
-                    repository.RollbackTransaction();
-                }
+                //}
+                //catch (Exception)
+                //{
+                //    repository.RollbackTransaction();
+                //}
             }
         }
     }

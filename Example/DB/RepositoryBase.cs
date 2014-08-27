@@ -32,7 +32,6 @@ namespace Example.DB
             _transaction = _session.BeginTransaction();
         }
 
-
         public void CommitTransaction()
         {
             // _transaction will be replaced with a new transaction
@@ -98,7 +97,7 @@ namespace Example.DB
 
         public virtual Person GetPerson()
         {
-            return _session.QueryOver<Person>().Where(x => x.FirstName == "AnnM").SingleOrDefault();
+            return _session.QueryOver<Person>().Where(x => x.FirstName == "Ben").SingleOrDefault();
         }
 
 

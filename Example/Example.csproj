@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Example</RootNamespace>
     <AssemblyName>Example</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,24 +35,32 @@
   <ItemGroup>
     <Reference Include="DevExpress.Data.v12.2, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress\DXperience 12.2\Bin\Framework\DevExpress.Data.v12.2.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\DevExpress\DXperience 12.2\Bin\Framework\DevExpress.Data.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Printing.v12.2.Core, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress\DXperience 12.2\Bin\Framework\DevExpress.Printing.v12.2.Core.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\DevExpress\DXperience 12.2\Bin\Framework\DevExpress.Printing.v12.2.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Utils.v12.2, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress\DXperience 12.2\Bin\Framework\DevExpress.Utils.v12.2.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\DevExpress\DXperience 12.2\Bin\Framework\DevExpress.Utils.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraEditors.v12.2, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\DevExpress\DXperience 12.2\Bin\Framework\DevExpress.XtraEditors.v12.2.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\DevExpress\DXperience 12.2\Bin\Framework\DevExpress.XtraEditors.v12.2.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.XtraGrid.v12.2, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v12.2, Version=12.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="NHibernate">
-      <HintPath>D:\Documents\libraries\Required_Bins\NHibernate.dll</HintPath>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Documents\libraries\Required_Bins\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\..\Documents\libraries\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Documents\libraries\Required_Bins\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -116,6 +125,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\DataSources\City.datasource" />
     <None Include="Properties\DataSources\Person.datasource" />

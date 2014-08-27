@@ -3,7 +3,7 @@
                    assembly="Example"
                    namespace="Example.Entities">
 
-  <class name="City" table="[City]" lazy="true">
+  <class name="City" table="[city]" lazy="true">
 
     <id name="Id" column="id" type ="int" >
 

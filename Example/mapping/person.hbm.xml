@@ -16,9 +16,9 @@
     <many-to-one name="City" column="city_id" cascade="none"
     class="City" fetch="join" />
 
-    <one-to-one name="Extra" class ="AdditionalInformation" cascade="delete" />
+    <one-to-one name="Extra" class ="AdditionalInformation" property-ref="Person_id" cascade="all"/>
    
-    <bag name="Automobiles" table="automobile" cascade="delete" inverse="true" lazy="false">
+    <bag name="Automobiles" table="automobile" cascade="all-delete-orphan" inverse="true" >
       <key>
         <column name="person_id"/>
       </key>
@@ -26,7 +26,7 @@
     </bag>
 
 
-    <bag name="Certificates" table="person_certificate" cascade="delete" lazy="false" >
+    <bag name="Certificates" table="[person_certificate]" cascade="save-update" lazy="false" >
       <key column="person_id" />
       <many-to-many class="Certificate" column="certificate_id"
       not-found="exception"

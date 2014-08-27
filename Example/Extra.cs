@@ -28,14 +28,31 @@ namespace Example
 
         private void Extra_Load(object sender, EventArgs e)
         {
-            txtBirthPlace.Text = myPerson.Extra.PlaceOfBirth;
-            txtBirtDate.Text = myPerson.Extra.DateOfBirth.ToString();
+            if (myPerson.Extra == null) 
+            {
+                txtBirthPlace.Text = null;
+                txtBirtDate.Text = DateTime.Now.ToString();
+            }
+            else
+            {
+                txtBirthPlace.Text = myPerson.Extra.PlaceOfBirth;
+                txtBirtDate.Text = myPerson.Extra.DateOfBirth.ToString();
+            }
         }
 
         private void btnSaveExtra_Click(object sender, EventArgs e)
         {
-            myPerson.Extra = new AdditionalInformation { PlaceOfBirth = txtBirthPlace.Text, DateOfBirth = Convert.ToDateTime(txtBirtDate.Text) };
-            this.Close();
+            if (myPerson.Extra == null)
+            {
+                myPerson.Extra = new AdditionalInformation { PlaceOfBirth = txtBirthPlace.Text, DateOfBirth = Convert.ToDateTime(txtBirtDate.Text) };
+                this.Close();
+            }
+            else 
+            {
+                myPerson.Extra.DateOfBirth = Convert.ToDateTime(txtBirtDate.Text);
+                myPerson.Extra.PlaceOfBirth = txtBirthPlace.Text;
+                this.Close();
+            }
         }
 
     }
